@@ -166,5 +166,5 @@ public class Blog extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		Blog blog = new Blog();
 		// hp.display();
-	}
+	}  
 }
