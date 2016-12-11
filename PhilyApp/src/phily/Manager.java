@@ -9,14 +9,55 @@ import java.util.HashMap;
 
 
 public class Manager {
-	public static HashMap<Integer, HistoricSites> HistoricSites = new HashMap<Integer, HistoricSites>();
-	public static HashMap<Integer, Libraries> Libraries = new HashMap<Integer, Libraries>();
-	public static HashMap<Integer, Museums> Museums = new HashMap<Integer, Museums>();
-	public static HashMap<Integer, Parks> Parks = new HashMap<Integer, Parks>();
-	public static HashMap<Integer, Theaters> Theaters = new HashMap<Integer, Theaters>();
-	public static HashMap<Integer, Universities> Universities = new HashMap<Integer, Universities>();
-
-	public static void loadParks(String fileName){
+	public HashMap<Integer, Destinations> HistoricSites = new HashMap<Integer, Destinations>();
+	public HashMap<Integer, Destinations> Libraries = new HashMap<Integer, Destinations>();
+	public HashMap<Integer, Destinations> Museums = new HashMap<Integer, Destinations>();
+	public HashMap<Integer, Destinations> Parks = new HashMap<Integer, Destinations>();
+	public HashMap<Integer, Destinations> Theaters = new HashMap<Integer, Destinations>();
+	public HashMap<Integer, Destinations> Universities = new HashMap<Integer, Destinations>();
+	
+	public static void main(String args[]){
+		Manager m = new Manager();
+	}
+	
+	public Manager(){
+		loadMuseums("museums.txt");
+		loadParks("parks.csv");
+		loadLibraries("libraries.csv");
+		loadUniverties("universities.csv");
+		loadTheaters("theaters.csv");
+		loadHistoricSites("historicSites.csv");
+	}
+	
+	public void loadMuseums(String fileName){
+		File file = new File(fileName);
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			while((line = br.readLine())!= null){
+				//System.out.println(line);
+				String[] tokens = line.split("\t");
+				int objectID = Integer.parseInt(tokens[2]);
+				double x = Double.parseDouble(tokens[0]);
+				double y = Double.parseDouble(tokens[1]);
+				String name = tokens[3];
+				String address = tokens[4];
+				String zip = tokens[5];
+				String phone = tokens[6];
+				Museums p = new Museums(objectID,x,y,name,address,zip,phone);
+				Museums.put(objectID,p);
+			}
+			System.out.println("finish");
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadParks(String fileName){
 		File file = new File(fileName);
 		try {
 			FileReader fr = new FileReader(file);
@@ -34,6 +75,120 @@ public class Manager {
 				String phone = tokens[6];
 				Parks p = new Parks(objectID,x,y,name,address,zip,phone);
 				Parks.put(objectID,p);
+			}
+			System.out.println("finish");
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadLibraries(String fileName){
+		File file = new File(fileName);
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			while((line = br.readLine())!= null){
+				//System.out.println(line);
+				String[] tokens = line.split(",");
+				//System.out.println(tokens.length);
+				int objectID = Integer.parseInt(tokens[2]);
+				double x = Double.parseDouble(tokens[0]);
+				double y = Double.parseDouble(tokens[1]);
+				String name = tokens[3];
+				String address = tokens[4];
+				String zip = tokens[5];
+				String phone = tokens[6];
+				Libraries p = new Libraries(objectID,x,y,name,address,zip,phone);
+				Libraries.put(objectID,p);
+			}
+			System.out.println("finish");
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadUniverties(String fileName){
+		File file = new File(fileName);
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			while((line = br.readLine())!= null){
+				//System.out.println(line);
+				String[] tokens = line.split(",");
+				int objectID = Integer.parseInt(tokens[2]);
+				double x = Double.parseDouble(tokens[0]);
+				double y = Double.parseDouble(tokens[1]);
+				String name = tokens[3];
+				String address = tokens[4];
+				String zip = tokens[5];
+				String phone = tokens[6];
+				Universities p = new Universities(objectID,x,y,name,address,zip,phone);
+				Universities.put(objectID,p);
+			}
+			System.out.println("finish");
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadTheaters(String fileName){
+		File file = new File(fileName);
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			while((line = br.readLine())!= null){
+				//System.out.println(line);
+				String[] tokens = line.split(",");
+				int objectID = Integer.parseInt(tokens[2]);
+				double x = Double.parseDouble(tokens[0]);
+				double y = Double.parseDouble(tokens[1]);
+				String name = tokens[3];
+				String address = tokens[4];
+				String zip = tokens[5];
+				String phone = tokens[6];
+				Theaters p = new Theaters(objectID,x,y,name,address,zip,phone);
+				Theaters.put(objectID,p);
+			}
+			System.out.println("finish");
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadHistoricSites(String fileName){
+		File file = new File(fileName);
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			while((line = br.readLine())!= null){
+				//System.out.println(line);
+				String[] tokens = line.split(",");
+				System.out.println(tokens.length);
+				int objectID = Integer.parseInt(tokens[2]);
+				double x = Double.parseDouble(tokens[0]);
+				double y = Double.parseDouble(tokens[1]);
+				String name = tokens[3];
+				String address = tokens[4];
+				String zip = tokens[5];
+				String phone = tokens[6];
+				HistoricSites p = new HistoricSites(objectID,x,y,name,address,zip,phone);
+				HistoricSites.put(objectID,p);
 			}
 			System.out.println("finish");
 			br.close();
