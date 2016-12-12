@@ -19,7 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-
+/**
+ * This class defines the second page of the blog part
+ * 
+ */
 @SuppressWarnings("serial")
 public class Blog2 extends JFrame implements ActionListener {
 	private static final int WIDTH = 800;
@@ -39,11 +42,15 @@ public class Blog2 extends JFrame implements ActionListener {
 	private JLabel background;
 	private JLabel topPic;
 
+	/**
+	 * Constructor, initialize all components in the frame 
+	 */
 	public Blog2() {
 		JPanel panel = new JPanel();
 		background = new JLabel();
 		getContentPane().setLayout(null);
-
+		
+		//background
 		ImageIcon background_image = new ImageIcon("background.png");
 		background.setLayout(null);
 		background.setIcon(background_image);
@@ -55,7 +62,8 @@ public class Blog2 extends JFrame implements ActionListener {
 		Image newing = getScaledImage(image, 300, 300);
 		icon = new ImageIcon(newing);
 		topPic = new JLabel(icon);
-
+		
+		// Changing images controlled by a timer 
 		chromeShown = 1;
 		panel.setBounds(20, 40, 300, 300);
 		panel.add(topPic);
@@ -143,10 +151,7 @@ public class Blog2 extends JFrame implements ActionListener {
 		
 		p1Area.setFont(new Font("monospaced", Font.PLAIN, 15));
 		
-		
-//		JScrollPane scroll = new JScrollPane(p1Area);
 		p1Area.setBounds(350, 90, 400, 275);
-//		scroll.setBounds(350, 80, 400, 230);
 		getContentPane().add(p1Area);
 		
 		nextButton = new JButton("Next >>");
@@ -176,7 +181,15 @@ public class Blog2 extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-
+	
+	/**
+	 * resize the image icon
+	 * @param
+	 * 		srcImage - image needed to be resized
+	 * 		w - new width
+	 * 		h - new height
+	 * 				
+	 */
 	private Image getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
@@ -186,6 +199,13 @@ public class Blog2 extends JFrame implements ActionListener {
 		return resizedImg;
 	}
 
+	
+	/**
+	 * Define what action will be performed after an event occurs
+	 * Pressing PrevButton will go the the previous blog.
+	 * Pressing the nextButton will go to next blog
+	 * Pressing returnButton will go back to the homepage
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

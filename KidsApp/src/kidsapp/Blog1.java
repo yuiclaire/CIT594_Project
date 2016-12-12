@@ -1,6 +1,5 @@
 package kidsapp;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -19,6 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * This class defines the first page of the blog part
+ * 
+ */
 @SuppressWarnings("serial")
 public class Blog1 extends JFrame implements ActionListener {
 	private static final int WIDTH = 800;
@@ -31,13 +34,15 @@ public class Blog1 extends JFrame implements ActionListener {
 
 	private JButton returnButton;
 	private JButton nextButton;
-	// private JButton prevButton;
 
 	private Timer timer;
 
 	private JLabel background;
 	private JLabel topPic;
-
+	
+	/**
+	 * Constructor, initialize all components in the frame 
+	 */
 	public Blog1() {
 
 		JPanel panel = new JPanel();
@@ -157,6 +162,14 @@ public class Blog1 extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	/**
+	 * resize the image icon
+	 * @param
+	 * 		srcImage - image needed to be resized
+	 * 		w - new width
+	 * 		h - new height
+	 * 				
+	 */
 	private Image getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
@@ -166,9 +179,14 @@ public class Blog1 extends JFrame implements ActionListener {
 		return resizedImg;
 	}
 
+	
+	/**
+	 * Define what action will be performed after an event occurs
+	 * Pressing the nextButton wil go to next blog
+	 * Pressing returnButton will go back to the homepage
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getSource() == nextButton) {
 
 			this.setVisible(false);

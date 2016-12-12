@@ -20,6 +20,11 @@ import javax.swing.JPanel;
 
 import javax.swing.JTextArea;
 
+
+/**
+ * This class defines the third page of the blog part
+ * 
+ */
 @SuppressWarnings("serial")
 public class Blog3 extends JFrame implements ActionListener {
 	private static final int WIDTH = 800;
@@ -39,6 +44,9 @@ public class Blog3 extends JFrame implements ActionListener {
 	private JLabel background;
 	private JLabel topPic;
 
+	/**
+	 * Constructor, initialize all components in the frame 
+	 */
 	public Blog3() {
 		JPanel panel = new JPanel();
 		background = new JLabel();
@@ -165,7 +173,15 @@ public class Blog3 extends JFrame implements ActionListener {
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-
+	
+	/**
+	 * resize the image icon
+	 * @param
+	 * 		srcImage - image needed to be resized
+	 * 		w - new width
+	 * 		h - new height
+	 * 				
+	 */
 	private Image getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
@@ -175,9 +191,15 @@ public class Blog3 extends JFrame implements ActionListener {
 		return resizedImg;
 	}
 
+	
+	/**
+	 * Define what action will be performed after an event occurs
+	 * Pressing PrevButton will go the the previous blog.
+	 * Pressing the nextButton wil go to next blog
+	 * Pressing returnButton will go back to the homepage
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getSource() == prevButton) {
 
 			this.setVisible(false);

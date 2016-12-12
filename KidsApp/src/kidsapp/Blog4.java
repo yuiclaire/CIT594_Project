@@ -1,6 +1,5 @@
 package kidsapp;
 
-
 import java.awt.Color;
 
 import java.awt.Font;
@@ -22,6 +21,10 @@ import javax.swing.JPanel;
 
 import javax.swing.JTextArea;
 
+/**
+ * This class defines the fourth page of the blog part
+ * 
+ */
 @SuppressWarnings("serial")
 public class Blog4 extends JFrame implements ActionListener {
 	private static final int WIDTH = 800;
@@ -41,6 +44,9 @@ public class Blog4 extends JFrame implements ActionListener {
 	private JLabel background;
 	private JLabel topPic;
 
+	/**
+	 * Constructor, initialize all components in the frame
+	 */
 	public Blog4() {
 		JPanel panel = new JPanel();
 		background = new JLabel();
@@ -171,6 +177,14 @@ public class Blog4 extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	/**
+	 * resize the image icon
+	 * @param
+	 * 		srcImage - image needed to be resized
+	 * 		w - new width
+	 * 		h - new height
+	 * 				
+	 */
 	private Image getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
@@ -179,7 +193,13 @@ public class Blog4 extends JFrame implements ActionListener {
 		g2.dispose();
 		return resizedImg;
 	}
-
+	
+	/**
+	 * Define what action will be performed after an event occurs
+	 * Pressing PrevButton will go the the previous blog.
+	 * Pressing the nextButton will go to next blog
+	 * Pressing returnButton will go back to the homepage
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
