@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-
+/**
+This class is used for loading and managing data. 
+**/
 public class Manager {
 	public HashMap<Integer, Destinations> HistoricSites = new HashMap<Integer, Destinations>();
 	public HashMap<Integer, Destinations> Libraries = new HashMap<Integer, Destinations>();
@@ -24,7 +26,7 @@ public class Manager {
 		loadTheaters("theaters.csv");
 		loadHistoricSites("historicSites.csv");
 	}
-	
+	/*This method is used for load musuem related file*/
 	public void loadMuseums(String fileName){
 		File file = new File(fileName);
 		try {
@@ -52,7 +54,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 	}
-	
+	/*This method is used for load park related file*/
 	public void loadParks(String fileName){
 		File file = new File(fileName);
 		try {
@@ -80,7 +82,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 	}
-	
+	/*This method is used for load libraries file*/
 	public void loadLibraries(String fileName){
 		File file = new File(fileName);
 		try {
@@ -109,7 +111,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 	}
-	
+	/*This method is used for load universities file*/
 	public void loadUniverties(String fileName){
 		File file = new File(fileName);
 		try {
@@ -137,7 +139,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 	}
-	
+	/*This method is used for load Theaters file*/
 	public void loadTheaters(String fileName){
 		File file = new File(fileName);
 		try {
@@ -165,7 +167,7 @@ public class Manager {
 			e.printStackTrace();
 		}
 	}
-	
+	/*This method is used for load Historic Sites file*/
 	public void loadHistoricSites(String fileName){
 		File file = new File(fileName);
 		try {
