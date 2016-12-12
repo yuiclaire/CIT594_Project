@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The Destinations abstract class
+ * This class contains all the abstract methods for a subclass to extend.
+ */
 public abstract class Destinations {
 	public int objectID;
 	public String name;
