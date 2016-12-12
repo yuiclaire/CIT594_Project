@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The Universities class
+ * This class extends Destinations and implements all the abstract methods of it.
+ */
 public class Universities extends Destinations{
 
 	public Universities(int objectID, double x, double y, String name, String address, String zip, String phone){
