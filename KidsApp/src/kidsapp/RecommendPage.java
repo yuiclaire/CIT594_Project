@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 
@@ -66,7 +65,7 @@ public class RecommendPage extends JFrame implements ActionListener {
 
 		clearMarkerButton = new JButton("Clear All Markers");
 		clearMarkerButton.addActionListener(this);
-		
+
 		recommendButton = new JButton("Recommend");
 		recommendButton.addActionListener(this);
 		recommendButton.setEnabled(false);
@@ -90,8 +89,17 @@ public class RecommendPage extends JFrame implements ActionListener {
 		setSize(WIDTH, HEIGHT);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		browser.loadURL("file:///Users/Adele/Documents/workspace/KidsApp/myMap.html");
+		String html = "<!DOCTYPE html>" + "<html>" + "<head>"
+				+ "<meta name='viewport' content='initial-scale=1.0, user-scalable=no' />" + "<style type='text/css'>"
+				+ "html { height: 100% }" + "body { height: 100%; margin: 0; padding: 0 }"
+				+ "#map-canvas { height: 100% }" + "</style>" + "<script type='text/javascript'"
+				+ "src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB7J1zsErb9_7jxNu5KU5kIENFObAQEbl0&sensor=false'>"
+				+ "</script>" + "<script type='text/javascript'>" + "var map;" + "function initialize() {"
+				+ "var mapOptions = {" + "center: new google.maps.LatLng(39.957206, -75.171911)," + "zoom: 12" + "};"
+				+ "map = new google.maps.Map(document.getElementById('map-canvas')," + "mapOptions);" + "}"
+				+ "google.maps.event.addDomListener(window, 'load', initialize);" + "</script>" + "</head>" + "<body>"
+				+ "<div id='map-canvas'/>" + "</body>" + "</html>";
+		browser.loadHTML(html);
 	}
 
 	@Override
@@ -112,8 +120,7 @@ public class RecommendPage extends JFrame implements ActionListener {
 			double y = 39.981066480611737;
 			browser.executeJavaScript("myMarker.setMap(null);");
 			browser.executeJavaScript("var myLatlng = new google.maps.LatLng(" + y + "," + x + ");\n"
-					+ "var myMarker = new google.maps.Marker({position: myLatlng,\n"+
-					"icon: 'blue_MarkerA.png',"
+					+ "var myMarker = new google.maps.Marker({position: myLatlng,\n" + "icon: 'blue_MarkerA.png',"
 					+ "map: map,\ndraggable: true, animation: google.maps.Animation.DROP," + "title: 'Drag Me!'\n"
 					+ "});");
 			recommendButton.setEnabled(true);
@@ -124,7 +131,7 @@ public class RecommendPage extends JFrame implements ActionListener {
 		} else if (e.getSource() == returnButton) {
 			this.setVisible(false);
 			new HomePage();
-		}else if(e.getSource() == recommendButton){
+		} else if (e.getSource() == recommendButton) {
 			for (int i : location.keySet()) {
 				browser.executeJavaScript("marker" + i + ".setMap(null);");
 			}
@@ -132,16 +139,15 @@ public class RecommendPage extends JFrame implements ActionListener {
 				double x = location.get(i).x;
 				double y = location.get(i).y;
 				Destinations p = location.get(i);
-				browser.executeJavaScript(
-						"var distance1 = new Number("+ (x+y) +");"+
-						"var distance2 =  myMarker.getPosition().lat() + myMarker.getPosition().lng();"+
-						"if((distance1 - distance2) * (distance1 - distance2) <= 0.00005){"+
-						"var contentString = '<div id=1>'+" + "'<div id=2>'+"
-						+ "'<p><b>*************** MORE INFO ***************</b></p>'+" + "'<p><b>&nbsp&nbspname: " + p.name
-						+ "</b></p>'+" + "'<p><b>&nbsp&nbspaddress: " + p.address + "</b></p>'+"
+				browser.executeJavaScript("var distance1 = new Number(" + (x + y) + ");"
+						+ "var distance2 =  myMarker.getPosition().lat() + myMarker.getPosition().lng();"
+						+ "if((distance1 - distance2) * (distance1 - distance2) <= 0.00005){"
+						+ "var contentString = '<div id=1>'+" + "'<div id=2>'+"
+						+ "'<p><b>*************** MORE INFO ***************</b></p>'+" + "'<p><b>&nbsp&nbspname: "
+						+ p.name + "</b></p>'+" + "'<p><b>&nbsp&nbspaddress: " + p.address + "</b></p>'+"
 						+ "'<p><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
-						+ "Philadelphia, PA " + p.zip + "</b></p>'+" + "'<p><b>&nbsp&nbspphone: " + p.phone + "</b></p>'+"
-						+ "'</div>'+" + "'</div>';" + "var infowindow = new google.maps.InfoWindow({"
+						+ "Philadelphia, PA " + p.zip + "</b></p>'+" + "'<p><b>&nbsp&nbspphone: " + p.phone
+						+ "</b></p>'+" + "'</div>'+" + "'</div>';" + "var infowindow = new google.maps.InfoWindow({"
 						+ "content: contentString});\n" + "var myLatlng" + i + " = new google.maps.LatLng(" + y + ","
 						+ x + ");\n" + "var marker" + i + " = new google.maps.Marker({\n" + "    position: myLatlng" + i
 						+ ",\n" + "    map: map,\ndraggable: false, animation: google.maps.Animation.DROP,"
@@ -152,6 +158,4 @@ public class RecommendPage extends JFrame implements ActionListener {
 		}
 	}
 
-
-	
 }

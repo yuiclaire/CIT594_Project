@@ -44,7 +44,7 @@ public class Manager {
 				Museums p = new Museums(objectID,x,y,name,address,zip,phone);
 				Museums.put(objectID,p);
 			}
-			System.out.println("finish");
+			//System.out.println("finish");
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -72,7 +72,7 @@ public class Manager {
 				Parks p = new Parks(objectID,x,y,name,address,zip,phone);
 				Parks.put(objectID,p);
 			}
-			System.out.println("finish");
+			//System.out.println("finish");
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -101,7 +101,7 @@ public class Manager {
 				Libraries p = new Libraries(objectID,x,y,name,address,zip,phone);
 				Libraries.put(objectID,p);
 			}
-			System.out.println("finish");
+			//System.out.println("finish");
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -129,7 +129,7 @@ public class Manager {
 				Universities p = new Universities(objectID,x,y,name,address,zip,phone);
 				Universities.put(objectID,p);
 			}
-			System.out.println("finish");
+			//System.out.println("finish");
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -157,7 +157,7 @@ public class Manager {
 				Theaters p = new Theaters(objectID,x,y,name,address,zip,phone);
 				Theaters.put(objectID,p);
 			}
-			System.out.println("finish");
+			//System.out.println("finish");
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -175,7 +175,7 @@ public class Manager {
 			while((line = br.readLine())!= null){
 				//System.out.println(line);
 				String[] tokens = line.split(",");
-				System.out.println(tokens.length);
+				//System.out.println(tokens.length);
 				int objectID = Integer.parseInt(tokens[2]);
 				double x = Double.parseDouble(tokens[0]);
 				double y = Double.parseDouble(tokens[1]);
@@ -186,7 +186,7 @@ public class Manager {
 				HistoricSites p = new HistoricSites(objectID,x,y,name,address,zip,phone);
 				HistoricSites.put(objectID,p);
 			}
-			System.out.println("finish");
+			//System.out.println("finish");
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
