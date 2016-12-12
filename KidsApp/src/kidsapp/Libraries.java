@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The Libraries class
+ * This class extends Destination and implements all the abstract methods of Destination.
+ */
 public class Libraries extends Destinations{
 
 	public Libraries(int objectID, double x, double y, String name, String address, String zip, String phone){
