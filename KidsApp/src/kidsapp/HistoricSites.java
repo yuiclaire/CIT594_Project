@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The HistoricSites class
+ * This class extends Destination and implements all the abstract methods of Destination.
+ */
 public class HistoricSites extends Destinations{
 
 	public HistoricSites(int objectID, double x, double y, String name, String address, String zip, String phone){
@@ -62,7 +65,6 @@ public class HistoricSites extends Destinations{
 
 	@Override
 	/**
-	 * 
 	 * @return Return a String containing all information separated by comma
 	 */
 	public String toString() {
