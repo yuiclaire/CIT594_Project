@@ -1,7 +1,7 @@
 package kidsapp;
 /**
  * The Parks class
- * This class extends Destinations and implements all the abstract methods of Destination.
+ * This class extends Destinations and implements all the abstract methods of it.
  */
 public class Parks extends Destinations {
 
