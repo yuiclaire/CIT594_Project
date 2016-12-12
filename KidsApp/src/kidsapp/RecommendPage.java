@@ -13,19 +13,27 @@ import javax.swing.JPanel;
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 
+/**
+ * 
+ * This class defines the recommend page of our application.
+ * Put a marker on the map and all qualifying locations close to 
+ * that marker will be shown on the map
+ * A user can also clear all markers with one click to start a new search.
+ */
 @SuppressWarnings("serial")
 public class RecommendPage extends JFrame implements ActionListener {
+	// size of the frame
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
 
 	public static final int MIN_ZOOM = 0;
 	public static final int MAX_ZOOM = 100;
 	private static int zoomValue = 12;
-
+	
+	// Set the Customer Search Mode to be false by default 
 	boolean customerSearch = false;
 
 	Map<Integer, Destinations> location;
-	// Manager manager;
 
 	private JButton zoomInButton;
 	private JButton zoomOutButton;
@@ -35,8 +43,17 @@ public class RecommendPage extends JFrame implements ActionListener {
 	private JButton returnButton;
 
 	Browser browser;
-
+	
+	/**
+	 * Constructor, initialize all components in the frame
+	 * @param text
+	 * 				determines what kinds of destination to use
+	 * @param m
+	 * 				Manager object provides the data needed in searching
+	 */
 	public RecommendPage(String text, Manager m) {
+		
+		// determine which kinds of destination to search
 		if (text.equals("Parks")) {
 			location = m.Parks;
 		} else if (text.equals("Museums")) {
@@ -83,12 +100,14 @@ public class RecommendPage extends JFrame implements ActionListener {
 
 		add(view, BorderLayout.CENTER);
 		add(toolBar, BorderLayout.SOUTH);
-
+		
 		setTitle("Philly");
 		setResizable(false);
 		setSize(WIDTH, HEIGHT);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		// Initialize the web page embedded in the frame
 		String html = "<!DOCTYPE html>" + "<html>" + "<head>"
 				+ "<meta name='viewport' content='initial-scale=1.0, user-scalable=no' />" + "<style type='text/css'>"
 				+ "html { height: 100% }" + "body { height: 100%; margin: 0; padding: 0 }"
@@ -101,7 +120,17 @@ public class RecommendPage extends JFrame implements ActionListener {
 				+ "<div id='map-canvas'/>" + "</body>" + "</html>";
 		browser.loadHTML(html);
 	}
-
+	
+	/**
+	 * Define what action will be performed after an action happens
+	 * Clicking on the zoomInButton will drag the map closer.
+	 * Clicking on the zoomOutButton will push the map farther.
+	 * Clicking on the setMarkerButton will put a draggable marker on the map.
+	 * Clicking on the clearMarkerButton will clean all locations.
+	 * Clicking on the returnButton will return to homepage.
+	 * Clicking on the recommendButton will show all locations close to the customer_put marker
+	 * then the map will also be updated and show all qualifying locations.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == zoomInButton) {
@@ -116,8 +145,12 @@ public class RecommendPage extends JFrame implements ActionListener {
 			for (int i : location.keySet()) {
 				browser.executeJavaScript("marker" + i + ".setMap(null);");
 			}
+			
+			// initial position of the draggable user_put marker
 			double x = -75.160635355809347;
 			double y = 39.981066480611737;
+			
+			//clean old markers and put new markers on the map
 			browser.executeJavaScript("myMarker.setMap(null);");
 			browser.executeJavaScript("var myLatlng = new google.maps.LatLng(" + y + "," + x + ");\n"
 					+ "var myMarker = new google.maps.Marker({position: myLatlng,\n" + "icon: 'blue_MarkerA.png',"
@@ -139,6 +172,8 @@ public class RecommendPage extends JFrame implements ActionListener {
 				double x = location.get(i).x;
 				double y = location.get(i).y;
 				Destinations p = location.get(i);
+				
+				// execute javascript code to set the markers
 				browser.executeJavaScript("var distance1 = new Number(" + (x + y) + ");"
 						+ "var distance2 =  myMarker.getPosition().lat() + myMarker.getPosition().lng();"
 						+ "if((distance1 - distance2) * (distance1 - distance2) <= 0.00005){"

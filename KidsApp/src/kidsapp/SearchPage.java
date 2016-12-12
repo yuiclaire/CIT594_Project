@@ -18,6 +18,17 @@ import javax.swing.event.DocumentListener;
 import com.teamdev.jxbrowser.chromium.Browser;
 import com.teamdev.jxbrowser.chromium.swing.BrowserView;
 
+/**
+ * 
+ * This class defines the search page of our application. Two main features
+ * are provided: 
+ * 		1. Show all locations of the specific on the map 
+ * 		2. After Press Search Button, only the locations whose names contain user input will be
+ * 			shown on the map 
+ * If a user click on the marker or put mouse on the marker,
+ * the detail information of that location will be shown. A user can also clear
+ * all markers with one click to start a new search.
+ */
 @SuppressWarnings("serial")
 public class SearchPage extends JFrame implements ActionListener {
 	private static final int WIDTH = 800;
@@ -26,7 +37,8 @@ public class SearchPage extends JFrame implements ActionListener {
 	public static final int MIN_ZOOM = 0;
 	public static final int MAX_ZOOM = 100;
 	private static int zoomValue = 12;
-
+	
+	// Set the Customer Search Mode to be false by default 
 	boolean customerSearch = false;
 
 	Map<Integer, Destinations> location;
@@ -42,8 +54,17 @@ public class SearchPage extends JFrame implements ActionListener {
 	private JButton returnButton;
 
 	Browser browser;
-
+	
+	/**
+	 * Constructor, initialize all components in the frame
+	 * @param text
+	 * 				determines what kinds of destination to use
+	 * @param m
+	 * 				Manager object provides the data needed in searching
+	 */
 	public SearchPage(String text, Manager m) {
+		
+		// determine which kinds of destination to search
 		if (text.equals("Parks")) {
 			location = m.Parks;
 		} else if (text.equals("Museums")) {
@@ -57,10 +78,12 @@ public class SearchPage extends JFrame implements ActionListener {
 		} else if (text.equals("Historical Sites")) {
 			location = m.HistoricSites;
 		}
-
+		
+		//initialize the browser
 		browser = new Browser();
 		BrowserView view = new BrowserView(browser);
-
+		
+		// initialize the buttons
 		zoomInButton = new JButton("Zoom In");
 		zoomInButton.addActionListener(this);
 
@@ -131,7 +154,7 @@ public class SearchPage extends JFrame implements ActionListener {
 		setSize(WIDTH, HEIGHT);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		// Initialize the web page embedded in the frame
 		String html = "<!DOCTYPE html>" + "<html>" + "<head>"
 				+ "<meta name='viewport' content='initial-scale=1.0, user-scalable=no' />" + "<style type='text/css'>"
 				+ "html { height: 100% }" + "body { height: 100%; margin: 0; padding: 0 }"
@@ -145,6 +168,17 @@ public class SearchPage extends JFrame implements ActionListener {
 		browser.loadHTML(html);
 	}
 
+	/**
+	 * Define what action will be performed after an action happens Clicking on
+	 * the zoomInButton will drag the map closer. Clicking on the zoomOutButton
+	 * will push the map farther. Clicking on the setMarkerButton will show all
+	 * locations. Clicking on the clearMarkerButton will clean all locations.
+	 * Clicking on the returnButton will return to homepage. Clicking on the
+	 * searchButton will start customer searching mode Clicking on the
+	 * stopButton will exit customer mode. If it is in customer searching mode
+	 * and the content of the JTextField changes then the map will also be
+	 * updated and show all qualifying locations.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == zoomInButton) {
@@ -164,11 +198,11 @@ public class SearchPage extends JFrame implements ActionListener {
 				double y = location.get(i).y;
 				Destinations p = location.get(i);
 				browser.executeJavaScript("var contentString = '<div id=1>'+" + "'<div id=2>'+"
-						+ "'<p><b>*************** MORE INFO ***************</b></p>'+" + "'<p><b>&nbsp&nbspname: " + p.name
-						+ "</b></p>'+" + "'<p><b>&nbsp&nbspaddress: " + p.address + "</b></p>'+"
+						+ "'<p><b>*************** MORE INFO ***************</b></p>'+" + "'<p><b>&nbsp&nbspname: "
+						+ p.name + "</b></p>'+" + "'<p><b>&nbsp&nbspaddress: " + p.address + "</b></p>'+"
 						+ "'<p><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
-						+ "Philadelphia, PA " + p.zip + "</b></p>'+" + "'<p><b>&nbsp&nbspphone: " + p.phone + "</b></p>'+"
-						+ "'</div>'+" + "'</div>';" + "var infowindow = new google.maps.InfoWindow({"
+						+ "Philadelphia, PA " + p.zip + "</b></p>'+" + "'<p><b>&nbsp&nbspphone: " + p.phone
+						+ "</b></p>'+" + "'</div>'+" + "'</div>';" + "var infowindow = new google.maps.InfoWindow({"
 						+ "content: contentString});\n" + "var myLatlng" + i + " = new google.maps.LatLng(" + y + ","
 						+ x + ");\n" + "var marker" + i + " = new google.maps.Marker({\n" + "    position: myLatlng" + i
 						+ ",\n" + "    map: map,\ndraggable: false, animation: google.maps.Animation.DROP,"
@@ -191,7 +225,14 @@ public class SearchPage extends JFrame implements ActionListener {
 		}
 
 	}
-
+	
+	/**
+	 * Get the qualifying locations whose name containing user input string 
+	 * @param s 
+	 * 		user input string
+	 * @return
+	 * 		An ArrayList of the ids of qualifying locations
+	 */
 	public ArrayList<Integer> searchKeyWords(String s) {
 		ArrayList<Integer> find = new ArrayList<Integer>();
 		for (int id : location.keySet()) {
@@ -204,6 +245,11 @@ public class SearchPage extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Update the markers after user input changes
+	 * @param s
+	 * 		user input string
+	 */
 	public void re_search(String s) {
 		ArrayList<Integer> find = searchKeyWords(s);
 		for (int i : location.keySet()) {
@@ -219,9 +265,9 @@ public class SearchPage extends JFrame implements ActionListener {
 					+ "'<p><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"
 					+ "Philadelphia, PA " + p.zip + "</b></p>'+" + "'<p><b>&nbsp&nbspphone: " + p.phone + "</b></p>'+"
 					+ "'</div>'+" + "'</div>';" + "var infowindow = new google.maps.InfoWindow({"
-					+ "content: contentString});\n" + "var myLatlng" + i + " = new google.maps.LatLng(" + y + ","
-					+ x + ");\n" + "var marker" + i + " = new google.maps.Marker({\n" + "    position: myLatlng" + i
-					+ ",\n" + "    map: map,\ndraggable: false, animation: google.maps.Animation.DROP,"
+					+ "content: contentString});\n" + "var myLatlng" + i + " = new google.maps.LatLng(" + y + "," + x
+					+ ");\n" + "var marker" + i + " = new google.maps.Marker({\n" + "    position: myLatlng" + i + ",\n"
+					+ "    map: map,\ndraggable: false, animation: google.maps.Animation.DROP,"
 					+ "    title: '**********MORE INFO**********\\rname: " + p.name + "\\raddress: " + p.address
 					+ "\\rphone: " + p.getPhone() + "'\n" + "});\n" + "marker" + i
 					+ ".addListener('click', function() {" + "infowindow.open(map, marker" + i + ");" + "});");

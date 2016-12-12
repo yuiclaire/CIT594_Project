@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 
 /**
  * 
- * 
+ * This class defines the homepage frame of our application.
  * */
 @SuppressWarnings("serial")
 public class HomePage extends JFrame implements ActionListener {
@@ -32,10 +32,12 @@ public class HomePage extends JFrame implements ActionListener {
 	private JComboBox<String> jcombobox;
 	String text;
 	
-	
-
 	private JLabel background;
 
+	/**
+	 * 
+	 * Constructor, initialize all components and add action listeners t them
+	 */
 	public HomePage() {
 		getContentPane().setLayout(null);
 		
@@ -60,16 +62,7 @@ public class HomePage extends JFrame implements ActionListener {
 		jcombobox = new JComboBox<String>(new String[]{"Parks","Theaters","Universities", "Libraries", "Museums","Historical Sites"});
 		getContentPane().add(jcombobox);
 		jcombobox.setFont(new Font("Courier New", Font.PLAIN, 22));
-		jcombobox.setBounds(330, 136, 250, 30);
-//		jcombobox.addItemListener(new ItemListener(){
-//			@Override
-//			public void itemStateChanged(ItemEvent e) {
-//				if(e.getStateChange() ==ItemEvent.SELECTED){
-//					text = (String)jcombobox.getSelectedItem();
-//				}
-//			}
-//		});
-		
+		jcombobox.setBounds(330, 136, 250, 30);	
 		background.add(jcombobox);
 								
 		// searchButton								
@@ -103,7 +96,14 @@ public class HomePage extends JFrame implements ActionListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-
+	/**
+	 * Define what action will be performed after an event occurs
+	 * Pressing the searchButton will go to search page, 
+	 * Pressing the recommendButton will go to recommend page,
+	 * Pressing blogButton will go to blog page.
+	 * @param e 
+	 * 			ActionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==searchButton){
