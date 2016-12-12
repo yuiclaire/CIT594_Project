@@ -15,7 +15,7 @@ Google Map javascript API: This interface is used for display and munipulation o
 Class:
 
 1. Destination: This is a super class for all positions in our database. 
-2. HistoricSites, Museum, Parks, Theaters, Universities: They are subclasses of Destinations.
+2. HistoricSites, Libraries, Museum, Parks, Theaters, Universities: They are subclasses of Destinations.
 3. RecommendPage: This class defines functions related to recommend.
 4. SearchPage: This class defines functions related to search.
 5. Manager: This class loads files and generates accordingly objects into our program. We use HashMap to store these objects by using their id as key.
