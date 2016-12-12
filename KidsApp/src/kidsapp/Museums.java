@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The Museums class
+ * This class extends Destination and implements all the abstract methods of Destination.
+ */
 public class Museums extends Destinations{
 
 	public Museums(int objectID, double x, double y, String name, String address, String zip, String phone){
