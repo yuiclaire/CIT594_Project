@@ -4,7 +4,9 @@ package kidsapp;
  * This class extends Destinations and implements all the abstract methods of it.
  */
 public class Parks extends Destinations {
-
+        /**
+         * Constructor for the class Parks
+         */
 	public Parks(int objectID, double x, double y, String name, String address, String zip, String phone) {
 		this.objectID = objectID;
 		this.x = x;
@@ -14,60 +16,67 @@ public class Parks extends Destinations {
 		this.zip = zip;
 		this.phone = phone;
 	}
-	
+	/**
+	 * @return the latitude of Parks
+	 */
 	@Override
 	public double getX() {
 		
 		return x;
 	}
-
+        /**
+	 * @return the longitude of Parks
+	 */
 	@Override
 	public double getY() {
 		
 		return y;
 	}
-	
+	/**
+	 * @return the zipcode of Parks
+	 */
 	@Override
 	public String getZip() {
 		
 		return zip;
 	}
-	
+	/**
+	 * @return the phoneNumber of Parks
+	 */
 	@Override
 	public String getPhone() {
 		
 		return phone;
 	}
-
+        /**
+	 * @return the objectID of Parks
+	 */
 	@Override
 	public int getObjectId() {
 		
 		return objectID;
 	}
-
+        /**
+	 * @return the name of Parks
+	 */
 	@Override
 	public String getName() {
 		
 		return name;
 	}
-
+	/**
+	 * @return the address of Parks
+	 */
 	@Override
 	public String getAddress() {
 		
 		return address;
 	}
-
-	@Override
-	public double getRating() {
-		
-		return rating;
-	}
-	
-	@Override
 	/**
 	 * 
-	 * @return Return a String containing all information separated by comma
+	 * @return a String containing all information separated by comma
 	 */
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
 		sb.append(x);
