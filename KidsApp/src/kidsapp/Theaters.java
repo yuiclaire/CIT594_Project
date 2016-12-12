@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The Theaters class
+ * This class extends Destinations and implements all the abstract methods of it.
+ */
 public class Theaters extends Destinations{
 
 	public Theaters(int objectID, double x, double y, String name, String address, String zip, String phone){
