@@ -1,5 +1,8 @@
 package kidsapp;
-
+/**
+ * The Parks class
+ * This class extends Destinations and implements all the abstract methods of Destination.
+ */
 public class Parks extends Destinations {
 
 	public Parks(int objectID, double x, double y, String name, String address, String zip, String phone) {
